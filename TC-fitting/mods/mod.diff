@@ -1,0 +1,97 @@
+49,52c49,53
+<           if(ca < 1e-7){
+< 	              ca = ca + 1e-07
+<           }
+<           zInf = 1/(1 + (0.00043 / ca)^4.8)
+---
+>     if(ca < 1e-7){
+> 	:ca = ca + 1e-07
+> 	ca = 1e-07
+>     }
+>     zInf = 1/(1 + (0.00043 / ca)^4.8)
+110a111
+> 
+117,118c118,120
+<     	v = v+0.0001
+<     }
+---
+> 	v2 = v2+0.0001
+> 	}
+> 
+120,121c122,125
+< 	a = 0.32 * (13-v2) / ( exp((13-v2)/4) - 1)
+< 	b = 0.28 * (v2-40) / ( exp((v2-40)/5) - 1)
+---
+> 	:a = 0.32 * (13-v2) / ( exp((13-v2)/4) - 1)
+> 	:b = 0.28 * (v2-40) / ( exp((v2-40)/5) - 1)
+> 	a = 0.32 * vtrap(v2-13,4)
+> 	b = 0.28 * vtrap(40-v2,5)
+130c134,135
+< 	a = 0.032 * (15-v3) / ( exp((15-v3)/5) - 1)
+---
+> 	:a = 0.032 * (15-v3) / ( exp((15-v3)/5) - 1)
+> 	a = 0.032 * vtrap(v3-15,5)
+140a146,153
+> FUNCTION vtrap(x,c) { 
+> 	: Traps for 0 in denominator of rate equations
+> 	if (fabs(x/c) < 1e-6) {
+> 		vtrap = c + x/2
+> 	} else {
+> 		vtrap = x / (1-exp(-x/c)) 
+> 	}
+> }
+70a71
+> 
+55a56,57
+> 
+> 
+102a103
+> 
+63a64
+> 
+65,66c66,67
+<   LOCAL qt
+<   qt = 2.3^((34-21)/10)
+---
+>     LOCAL qt
+>     qt = 2.3^((34-21)/10)
+68,69c69,70
+< 	UNITSOFF
+< 		mInf = 1.0/(1+exp(-(v+56.93)/9.09)) : Parri and Crunelli, J. Neurosci. 1998
+---
+>     UNITSOFF
+>     mInf = 1.0/(1+exp(-(v+56.93)/9.09)) : Parri and Crunelli, J. Neurosci. 1998
+71c72
+<     	v = v+0.0001
+---
+> 	v = v+0.0001
+73,75c74,76
+< 		mAlpha = (0.182 * (v- -38))/(1-(exp(-(v- -38)/6)))
+< 		mBeta  = (0.124 * (-v -38))/(1-(exp(-(-v -38)/6)))
+< 		mTau = 6*(1/(mAlpha + mBeta))/qt
+---
+>     mAlpha = (0.182 * (v- -38))/(1-(exp(-(v- -38)/6)))
+>     mBeta  = (0.124 * (-v -38))/(1-(exp(-(-v -38)/6)))
+>     mTau = 6*(1/(mAlpha + mBeta))/qt
+77,79c78,80
+<   	if(v == -17){
+<    		v = v + 0.0001
+<   	}
+---
+>     if(v == -17){
+> 	v = v + 0.0001
+>     }
+81c82
+<       v = v+0.0001
+---
+> 	v = v+0.0001
+83c84
+<                 hInf = 1.0/(1+exp((v+58.7)/14.2)) : Amarillo et al., J Neurophysiol, 2014 
+---
+>     hInf = 1.0/(1+exp((v+58.7)/14.2)) : Amarillo et al., J Neurophysiol, 2014 
+86,87c87,88
+< 		hTau = (1/(hAlpha + hBeta))/qt
+< 	UNITSON
+---
+>     hTau = (1/(hAlpha + hBeta))/qt
+>     UNITSON
